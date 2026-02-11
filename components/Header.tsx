@@ -11,16 +11,31 @@ export default function Header() {
   const [wishlistCount, setWishlistCount] = useState(0);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  const fetchWishlistCount = async () => {
+    if (isAuthenticated()) {
+      try {
+        const data = await wishlistApi.getWishlistIds();
+        setWishlistCount(data.count);
+      } catch {
+        setWishlistCount(0);
+      }
+    }
+  };
+
   useEffect(() => {
     setIsLoggedIn(isAuthenticated());
-    
-    if (isAuthenticated()) {
-      wishlistApi.getWishlistIds().then((data) => {
-        setWishlistCount(data.count);
-      }).catch(() => {
-        setWishlistCount(0);
-      });
-    }
+    fetchWishlistCount();
+
+    // Listen for wishlist updates
+    const handleWishlistUpdate = () => {
+      fetchWishlistCount();
+    };
+
+    window.addEventListener('wishlist-updated', handleWishlistUpdate);
+
+    return () => {
+      window.removeEventListener('wishlist-updated', handleWishlistUpdate);
+    };
   }, []);
 
   const handleSearch = (e: React.FormEvent) => {

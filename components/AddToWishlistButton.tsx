@@ -42,6 +42,9 @@ export default function AddToWishlistButton({ productId }: AddToWishlistButtonPr
         await wishlistApi.addToWishlist(productId);
         setIsInWishlist(true);
       }
+      
+      // Dispatch event to update header count
+      window.dispatchEvent(new CustomEvent('wishlist-updated'));
     } catch (error) {
       console.error('Failed to update wishlist:', error);
     } finally {
