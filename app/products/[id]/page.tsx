@@ -157,15 +157,12 @@ export default async function ProductPage({ params }: ProductPageProps) {
             />
           )}
 
-          {/* Actions */}
+          {/* Wishlist Button */}
           <div className="flex gap-4 mb-8">
-            <button
-              className="flex-1 bg-primary-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-700 transition disabled:bg-gray-300 disabled:cursor-not-allowed"
-              disabled={!product.in_stock}
-            >
-              Add to Cart
-            </button>
             <AddToWishlistButton productId={product.id} />
+            <span className="text-gray-500 text-sm self-center">
+              Add to Wishlist
+            </span>
           </div>
 
           {/* Categories */}
