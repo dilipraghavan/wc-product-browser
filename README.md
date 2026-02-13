@@ -137,7 +137,6 @@ npm start
 ## Live Demo
 
 - **Frontend App:** [wc-product-browser.vercel.app](https://wc-product-browser.vercel.app)
-- **Backend API:** [techvault.wpshiftstudio.com](https://techvault.wpshiftstudio.com)
 
 ---
 
